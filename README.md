@@ -1,5 +1,9 @@
 # diceol
-eosforce 上部署的一个骰子游戏，挺无聊的。支持scatter/麦子钱包，给大家作个参考吧。  
+eosforce 上部署的一个骰子游戏，挺无聊的。支持scatter/麦子钱包，给大家作个参考吧。
+
+推荐链接格式是：http://www.bidname.net/App/EosForce?ref=XXXXX  
+
+如果XXXXX不是当前帐号，那么XXXXX帐号可以收到额外5%目前了无价值的DCL。
 
 没有使用EOS提供的两次提交随机种子的方式，而是通过链外resolver定期结算。每隔12秒的block的hash值，被resolver作为随机种子灌入合约，结算。  
 
