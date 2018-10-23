@@ -1,0 +1,9 @@
+{{set . "title" "Dice On Line"}}
+<script>
+ var dice_blockchain="eosforce";
+</script>
+{{append . "moreScripts" "/public/js/eosforce.js"}}
+
+{{template "header.html" .}}
+{{template "dice.html" .}}
+{{template "footer.html" .}}

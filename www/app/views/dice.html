@@ -1,0 +1,270 @@
+<div id="id_welcome_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="id_welcome_modal_label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 id="id_welcome_modal_title" class="modal-title text-success" id="id_welcome_modal_title">小赌怡情</h4>
+                <h3 id="id_welcome_modal_title" class="modal-title text-warning" id="id_welcome_modal_title">大赌伤身</h3>
+                <h2 id="id_welcome_modal_title" class="modal-title text-danger" id="id_welcome_modal_title">强赌灰飞烟灭！</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>首先，目前只支持PC版本的Chrome，需要您<a href="https://bbs.eosforce.io/?thread-192.htm" target="_blank">配置Scatter以及帐号</a>。Scatter是Chrome插件，您的私钥由它掌管，安全性毋庸置疑。注意：建议选择<strong class="text-danger">https://w1.eosforce.cn</strong></p>
+                <br>
+                <p>本dapp在数学期望平衡点上，扣了2%的获胜奖励。所以，玩家长期玩这个dice游戏，应该会以51%的概率持续亏下去。希望大家玩个乐子就行，不要玩的太大，长期来看，<strong class="text-danger">你是必然会输得内裤都不剩下的。</strong></p>
+                <br>
+                <p>每次下注都会给投注者发20%的DCL奖励，这个DCL我也没有想好怎么用，先发下去吧。初步计划是，本Dapp收益作为风投，DCL当成分红凭证。以后有人要开发菠菜之外的Dapp，可以找我要EOSForce作为投资，按比例给给DCL持有人分红即可。</p>
+                <br>
+                <p>代码随后我会发到github，方便大家黑。只是黑成功之后记得给我说一下。还有不要黑的太凶残，还请留下点运营钱，小小的黑一下就可以了，谢谢黑大大！</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="wrapper">
+    <div class="page-header" style="z-index:0;background-image:url('/public/img/luna.jpg');">
+        <div class="moving-clouds" style="z-index:-2;background-image: url('/public/img/clouds.png'); "></div>
+        
+        <div style="position:fixed;width:80%;height:80%;max-width:800px;min-width:360px">
+            <div class="nav-tabs-navigation">
+                <div class="nav-tabs-wrapper">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#oneshot" role="tab">单注</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#group10" role="tab">十人组</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#group100" role="tab">百人组</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tab-content text-center">
+                <div class="tab-pane active" id="oneshot" role="tabpanel">
+                    
+                    <div class ="col-row">
+                        <div class="hcenter" style="width:60%;min-width:320px;border-radius:80px;background-color:#60606080;padding:8px">
+                            <div id="id_slider_bet" class="slider noUi-target noUi-ltr noUi-horizontal noUi-connect" style="width:100%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-row" style="margin-top:5px">
+                        <div class="hcenter" style="width:60%;min-width:320px;border-radius:80px;background-color:#60606080;padding:8px">
+                            <div id="id_slider_celling" class="slider noUi-target noUi-ltr noUi-horizontal noUi-connect" style="width:100%"></div>
+                        </div>
+                    </div>
+                    <hr/>
+                    
+                    <div class="row">
+                        <div class="col-4">
+                            <p class="text-light" style="min-height:20px">Win EOS</p>
+                        </div>
+                        <div class="col-4">
+                            <p class="text-light" style="min-height:20px">Win Chance</p>
+                        </div>
+                        <div class="col-4">
+                            <p class="text-light" style="min-height:20px">Odds</p>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-4">
+                            <strong class="mdfont normal_yellow" id="id_strong_reward"></strong>
+                        </div>
+                        <div class="col-4">
+                            <strong class="mdfont normal_yellow" id="id_strong_winchance"></strong>
+                        </div>
+                        <div class="col-4">
+                            <strong class="mdfont normal_yellow" id="id_strong_odds"></strong>
+                        </div>
+                    </div>
+                    
+                    <hr/>
+                    
+                    <div class="row">
+                        <div class="col-4 text-light mdfont">
+                            <strong id="id_eos_balance">EOS</strong>
+                            <br/>
+                            <img src="/public/img/eos.png" style="width:32px;height:32px"> 
+                        </div>
+                        <div class="col-4">
+                            <a id="id_btn_bet" href="javascript:click_bet()" target="_blank" class="btn btn-success mdfont vcenter">Bet</a>
+                        </div>
+                        <div class="col-4 text-light mdfont">
+                            <srtong id="id_dcl_balance">DCL</srtong>
+                            <br/>
+                            <img src="/public/img/favicon.png" style="width:32px;height:32px">
+                        </div>
+                    </div>
+
+                    <div class="table-responsive text-center" style="max-height:400px;margin-top:10px">
+                        <table class="table table-sm table-hover">
+                            <thead>
+                                <tr class="text-light">
+                                    <th class="text-center nobreak" scope="col">玩家</th>
+                                    <th class="text-center nobreak" scope="col">押注</th>
+                                    <th class="text-center nobreak" scope="col">获利</th>
+                                    <th class="text-center nobreak" scope="col">骰子/上限</th>
+                                    <th class="text-center nobreak" scope="col">时间</th>
+                                </tr>
+                            </thead>
+                            <tbody id="id_tbody_allhis">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane" id="group10" role="tabpanel">
+                    <div class="row text-center">
+                        <h4 class="text-light" style="margin-left:auto;margin-right:auto;margin-top:15px;margin-bottom:15px">
+                            十人一组游戏，凑满十人次开奖!
+                        </h4>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-4 text-light mdfont">
+                            <strong id="id_eos_balance_grp10">EOS</strong>
+                            <br/>
+                            <img src="/public/img/eos.png" style="width:32px;height:32px"> 
+                        </div>
+                        <div class="col-4">
+                            <a href="javascript:click_grp('group10')" target="_blank" class="btn btn-danger mdfont vcenter">Join</a>
+                        </div>
+                        <div class="col-4 text-light mdfont">
+                            <srtong id="id_dcl_balance_grp10">DCL</srtong>
+                            <br/>
+                            <img src="/public/img/favicon.png" style="width:32px;height:32px">
+                        </div>
+                    </div>
+                    
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#group10_pool" role="tab">彩池</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#group10_his" role="tab">开奖历史</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tab-content text-center">
+                        <div class="tab-pane active" id="group10_pool" role="tabpanel">
+
+                            <div class="table-responsive text-center" style="max-height:400px;margin-top:10px">
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <tr class="text-light">
+                                            <th class="text-center nobreak" scope="col">玩家</th>
+                                            <th class="text-center nobreak" scope="col">入局时间</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="id_tbody_grp10_players">
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
+                        <div class="tab-pane" id="group10_his" role="tabpanel">
+                            <div class="table-responsive text-center" style="max-height:400px;margin-top:10px">
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <tr class="text-light">
+                                            <th class="text-center nobreak" scope="col">获奖人</th>
+                                            <th class="text-center nobreak" scope="col">骰子</th>
+                                            <th class="text-center nobreak" scope="col">奖金</th>
+                                            <th class="text-center nobreak" scope="col">开奖时间</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="id_tbody_grp10_history">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="tab-pane" id="group100" role="tabpanel">
+                    <div class="row text-center">
+                        <h4 class="text-light" style="margin-left:auto;margin-right:auto;margin-top:15px;margin-bottom:15px">
+                            百人一组游戏，凑满一百人次开奖!
+                        </h4>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-4 text-light mdfont">
+                            <strong id="id_eos_balance_grp100">EOS</strong>
+                            <br/>
+                            <img src="/public/img/eos.png" style="width:32px;height:32px"> 
+                        </div>
+                        <div class="col-4">
+                            <a href="javascript:click_grp('group100')" target="_blank" class="btn btn-danger mdfont vcenter">Join</a>
+                        </div>
+                        <div class="col-4 text-light mdfont">
+                            <srtong id="id_dcl_balance_grp100">DCL</srtong>
+                            <br/>
+                            <img src="/public/img/favicon.png" style="width:32px;height:32px">
+                        </div>
+                    </div>
+
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#group100_pool" role="tab">彩池</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#group100_his" role="tab">开奖历史</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tab-content text-center">
+                        <div class="tab-pane active" id="group100_pool" role="tabpanel">
+                            <div class="table-responsive text-center" style="max-height:400px;margin-top:10px">
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <tr class="text-light">
+                                            <th class="text-center nobreak" scope="col">玩家</th>
+                                            <th class="text-center nobreak" scope="col">入局时间</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="id_tbody_grp100_players">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="group100_his" role="tabpanel">
+                            <div class="table-responsive text-center" style="max-height:400px;margin-top:10px">
+                                <table class="table table-sm table-hover">
+                                    <thead>
+                                        <tr class="text-light">
+                                            <th class="text-center nobreak" scope="col">获奖人</th>
+                                            <th class="text-center nobreak" scope="col">骰子</th>
+                                            <th class="text-center nobreak" scope="col">奖金</th>
+                                            <th class="text-center nobreak" scope="col">开奖时间</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="id_tbody_grp100_history">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+

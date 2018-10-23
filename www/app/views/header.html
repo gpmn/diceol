@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>{{.title}}</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="shortcut icon" type="image/png" href="/public/img/favicon.png">
+
+        <link rel="stylesheet" type="text/css" href="/public/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="/public/css/diceol.css">
+        <link rel="stylesheet" type="text/css" href="/public/css/nucleo-icons.css">
+
+        {{range .moreStyles}}
+        <link rel="stylesheet" type="text/css" href="{{.}}">
+        {{end}}
+
+        <script src="/public/js/jquery-3.3.1.min.js"></script>
+        <script src="/public/js/jquery-ui-1.12.1.custom.min.js"></script>
+        <script src="/public/js/popper.min.js"></script>
+        <script src="/public/js/bootstrap.min.js"></script>
+        <script src="/public/js/bootstrap-switch.min.js"></script>
+        <script src="/public/js/nouislider.js"></script>
+        <script src="/public/js/diceol.js"></script>
+        <script src="/public/js/wNumb.js"></script>
+        {{range .moreScripts}}
+        <script src="{{.}}" type="text/javascript" charset="utf-8"></script>
+        {{end}}
+    </head>
+    <body>
+        <style>
+         .alertmsg{
+             position:fixed;
+             top:25%;
+             left:20%;
+             right:20%;
+             z-index:9999;
+         }
+         .notifymsg{
+             position:fixed;
+             top:25%;
+             left:20%;
+             right:20%;
+             z-index:9999;
+         }
+         .centerlize{
+             margin-left:auto;
+             margin-right:auto;
+         }
+         .longtext{
+             overflow: hidden;
+             text-overflow: ellipsis;
+             white-space: nowrap;
+         }
+         .mdfont{
+             font-size:18px;
+         }
+         .lgfont{
+             font-size:22px
+         }
+         .light_yellow{
+             color:#ffc;
+             font-weight:600;
+         }
+         .normal_yellow{
+             color:#ff6;
+             font-weight:600;
+         }
+         .dark_yellow{
+             color:#fbc658;
+             font-weight:600;
+         }
+         .vcenter{
+             margin-top:auto;
+             margin-bottom:auto;
+         }
+         .hcenter{
+             margin-left:auto;
+             margin-right:auto;
+         }
+         .noUi-tooltip{
+             margin-top:15px;
+             font-size:18px;
+             color:#fbc658;
+             font-weight:600;
+         }
+         .nobreak{
+             word-wrap:normal;
+             word-break:keep-all;
+         }
+
+        </style>
+        
+        <script>
+         function alert_message(msg){
+             $(".alert").remove();
+             var alert = '<div class="alert alert-danger alertmsg" style="word-break:break-all" role="alert">' + msg + '</div>';
+             $(alert).prependTo('body').show().delay(2000).fadeOut();
+         }
+
+         function notify_message(msg){
+             $(".alert").remove();
+             var notify = '<div class="alert alert-success notifymsg" style="word-break:break-all" role="alert">' + msg + '</div>';
+             $(notify).prependTo('body').show().delay(2000).fadeOut();
+         }
+
+         function timeFormat(tm){
+             return tm.getFullYear() + "-" + (tm.getMonth() + 1) + "-" + tm.getDate() + " " +
+                    tm.getHours() + ":" + tm.getMinutes() + ":" + tm.getSeconds();
+         }
+        </script>
+
+        <nav class="navbar navbar-expand-sm navbar-expand-md fixed-top navbar-transparent nav-no-padding" color-on-scroll="500">
+            <div class="container">
+                <div class="navbar-translate">
+                    <a class="navbar-brand" href="javascript:void(0)">
+                        FierceBull© <img style="width:24px;hight:24px" src="/public/img/favicon.png" class="creative-tim-logo">
+                    </a>
+                    <button class="navbar-toggler navbar-toggler-right navbar-burger light_yellow" type="button" data-toggle="collapse" data-target="#navbarToggler" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                        <span id="id_account" class="mdfont">---</span>
+                    </button>
+                    
+                </div>
+                <div class="collapse navbar-collapse" id="navbarToggler">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" rel="tooltip" title="Join telegram" data-placement="bottom" href="javascript:void(0)" target="_blank">
+                                <img style="width:24px;height:24px" src="/public/img/telegram.png">
+                                <span class="light_yellow">Telegram</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link light_yellow" rel="tooltip" title="Login" data-placement="bottom" href="javascript:login()" target="_blank">
+                                <img style="width:24px;height:24px" src="/public/img/login.png">
+                                <span class="light_yellow">Login</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link light_yellow" rel="tooltip" title="Logout" data-placement="bottom" href="javascript:logout()" target="_blank">
+                                <img style="width:24px;height:24px" src="/public/img/logout.png">
+                                <span class="light_yellow">Logout</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link light_yellow" rel="tooltip" title="Help" data-placement="bottom" href="javascript:void(0)" target="_blank">
+                                <img style="width:24px;height:24px" src="/public/img/help.png">
+                                <span class="light_yellow">Help</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
