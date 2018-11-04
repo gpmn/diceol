@@ -481,7 +481,7 @@ func (c *ResolverCtrl) doSolveGroup(group string, rangeBeginID int64) (err error
 	c.lock.Unlock()
 	if nil != err {
 		if !strings.Contains(err.Error(), "sql: no rows in result set") {
-			log.Printf("c.doSolveOneshot - c.dbmap.SelectOne failed : %v", err)
+			log.Printf("ResolverCtrl.doSolveGroup - c.dbmap.SelectOne failed : %v", err)
 			log.Printf("SELECT * FROM BlockInfoTbl WHERE MicroSec > %d ORDER BY BlockNum ASC LIMIT 1", rangeLast.MicroSec)
 		}
 
@@ -489,7 +489,7 @@ func (c *ResolverCtrl) doSolveGroup(group string, rangeBeginID int64) (err error
 		return err
 	}
 
-	log.Printf("c.doSolveGroup - use blk %d @ %s %d to solve group %d @ %d", blk.BlockNum, blk.TmStr, blk.MicroSec, rangeLast.RltID, rangeLast.MicroSec)
+	log.Printf("ResolverCtrl.doSolveGroup - use blk %d @ %s %d to solve group %d @ %d", blk.BlockNum, blk.TmStr, blk.MicroSec, rangeLast.RltID, rangeLast.MicroSec)
 
 	buf := fmt.Sprintf("%s", blk.BlockHash)
 	hash := sha256.Sum256([]byte(buf))
@@ -498,12 +498,23 @@ func (c *ResolverCtrl) doSolveGroup(group string, rangeBeginID int64) (err error
 		diceval += uint64(val)
 	}
 
-	log.Printf("c.doSolveGroup - %s => %x => %d => %d", blk.BlockHash, hash, diceval, diceval%100)
+	winnerID = int64(diceval) + rangeBeginID
+	var winner GroupTbl
+	c.lock.Lock()
+	err = c.dbmap.SelectOne(&winner, "SELECT * FROM GroupTbl WHERE RltID=? AND GrpType=?", winnerID, group)
+	if nil != err {
+		c.lock.Unlock()
+		log.Printf("ResolverCtrl.doSolveGroup - failed to select winner @ %d, err : %v", winnerID, err)
+		return err
+	}
+	c.lock.Unlock()
+
+	log.Printf("ResolverCtrl.doSolveGroup - %s => %x => %d => %d", blk.BlockHash, hash, diceval, diceval%100)
 	diceval %= uint64(base)
 	commentMap := make(map[string]interface{})
 	commentMap["reward"] = reward
-	commentMap["winner"] = rangeLast.Player
-	commentMap["winnerID"] = int64(diceval) + rangeLast.RltID - base + 1
+	commentMap["winner"] = winner.Player
+	commentMap["winnerID"] = winnerID
 
 	tmpBuf, _ := json.Marshal(commentMap)
 	comment := strings.Replace(string(tmpBuf), `"`, `\"`, -1)
@@ -526,7 +537,7 @@ func (c *ResolverCtrl) doSolveGroup(group string, rangeBeginID int64) (err error
 		c.lock.Unlock()
 	}
 	if nil != err {
-		log.Printf("c.doSolveGroup - execCmd or Exec failed : %v", err)
+		log.Printf("ResolverCtrl.doSolveGroup - execCmd or Exec failed : %v", err)
 	}
 	return err
 }
