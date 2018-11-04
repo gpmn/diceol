@@ -498,7 +498,7 @@ func (c *ResolverCtrl) doSolveGroup(group string, rangeBeginID int64) (err error
 		diceval += uint64(val)
 	}
 
-	winnerID = int64(diceval) + rangeBeginID
+	winnerID := int64(diceval) + rangeBeginID
 	var winner GroupTbl
 	c.lock.Lock()
 	err = c.dbmap.SelectOne(&winner, "SELECT * FROM GroupTbl WHERE RltID=? AND GrpType=?", winnerID, group)
