@@ -498,6 +498,8 @@ func (c *ResolverCtrl) doSolveGroup(group string, rangeBeginID int64) (err error
 		diceval += uint64(val)
 	}
 
+	diceval %= uint64(base)
+
 	winnerID := int64(diceval) + rangeBeginID
 	var winner GroupTbl
 	c.lock.Lock()
@@ -510,7 +512,7 @@ func (c *ResolverCtrl) doSolveGroup(group string, rangeBeginID int64) (err error
 	c.lock.Unlock()
 
 	log.Printf("ResolverCtrl.doSolveGroup - %s => %x => %d => %d", blk.BlockHash, hash, diceval, diceval%100)
-	diceval %= uint64(base)
+
 	commentMap := make(map[string]interface{})
 	commentMap["reward"] = reward
 	commentMap["winner"] = winner.Player
