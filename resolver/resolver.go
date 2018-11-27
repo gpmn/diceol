@@ -555,7 +555,7 @@ func (c *ResolverCtrl) doSolveOneshot(os *OneshotInfo) (err error) {
 			log.Printf("c.doSolveOneshot - c.dbmap.SelectOne failed : %v", err)
 			log.Printf("SELECT * FROM BlockInfoTbl WHERE strftime('%%s', TmStr) > %d ORDER BY BlockNum ASC LIMIT 1", os.MicroSec)
 		}
-		time.Sleep(time.Millisecond * 100)
+		time.Sleep(time.Millisecond * 1000)
 		return err
 	}
 
